@@ -94,7 +94,7 @@ export class AccountingComponent implements AfterViewInit, OnDestroy {
   }
 
   modifyQuantity (id, value) {
-    this.quantityService.put(id, { quantity: value < 0 ? 0 : value }).subscribe((quantity) => {
+    this.quantityService.put(id, { quantity: Math.max(0, value) }).subscribe((quantity) => {
       const product = this.tableData.find((product) => {
         return product.id === quantity.ProductId
       })
@@ -108,7 +108,7 @@ export class AccountingComponent implements AfterViewInit, OnDestroy {
   }
 
   modifyPrice (id, value) {
-    this.productService.put(id, { price: value < 0 ? 0 : value }).subscribe((product) => {
+    this.productService.put(id, { price: Math.max(0, value) }).subscribe((product) => {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       this.snackBarHelperService.open(`Price for ${product.name} has been updated.`, 'confirmBar')
       this.loadProducts()
