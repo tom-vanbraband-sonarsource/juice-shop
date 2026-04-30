@@ -43,7 +43,6 @@ import { DeluxeUserComponent } from './deluxe-user/deluxe-user.component'
 import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
 import { NFTUnlockComponent } from './nft-unlock/nft-unlock.component'
 import { ScoreBoardComponent } from './score-board/score-board.component'
-import { Web3SandboxComponent } from './web3-sandbox/web3-sandbox.component'
 
 const loadFaucetModule = async () => {
   const module = await import('./faucet/faucet.module')
@@ -239,7 +238,7 @@ const routes: Routes = [
   // vuln-code-snippet start tokenSaleChallenge
   {
     matcher: oauthMatcher,
-    data: { params: (window.location.href).substr(window.location.href.indexOf('#')) },
+    data: { params: (globalThis.location.href).substr(globalThis.location.href.indexOf('#')) },
     component: OAuthComponent
   },
   { // vuln-code-snippet neutral-line tokenSaleChallenge
