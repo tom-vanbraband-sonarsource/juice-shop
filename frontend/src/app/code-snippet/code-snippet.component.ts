@@ -4,7 +4,7 @@
  */
 
 import { CodeSnippetService, type CodeSnippet } from '../Services/code-snippet.service'
-import { CodeFixesService, type Fixes } from '../Services/code-fixes.service'
+import { CodeFixesService } from '../Services/code-fixes.service'
 import { CookieService } from 'ngx-cookie'
 import { ChallengeService } from '../Services/challenge.service'
 import { VulnLinesService, type result } from '../Services/vuln-lines.service'
@@ -90,7 +90,7 @@ export class CodeSnippetComponent implements OnInit {
   }
 
   changeFix (event: Event) {
-    this.setFix(parseInt((event.target as HTMLSelectElement).value, 10))
+    this.setFix(Number.parseInt((event.target as HTMLSelectElement).value, 10))
   }
 
   toggleTab = (event: number) => {
