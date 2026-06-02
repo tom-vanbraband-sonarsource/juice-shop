@@ -11,7 +11,7 @@ import {
   signMessage,
   InjectedConnector
 } from '@wagmi/core'
-const { ethereum } = window
+const { ethereum } = globalThis as any
 const BankAddress = '0x413744D59d31AFDC2889aeE602636177805Bd7b0'
 const client = createClient({
   autoConnect: true,
@@ -42,7 +42,7 @@ export class WalletWeb3Component {
   metamaskAddress = ''
   ngOnInit (): void {
     this.handleAuth()
-    window.ethereum.on('chainChanged', this.handleChainChanged.bind(this))
+    globalThis.ethereum.on('chainChanged', this.handleChainChanged.bind(this))
   }
 
   async handleChainChanged (chainId: string) {
@@ -51,7 +51,7 @@ export class WalletWeb3Component {
 
   async depositETH () {
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(globalThis.ethereum)
       const signer = provider.getSigner()
 
       const contract = new ethers.Contract(BankAddress, web3WalletABI, signer)
@@ -68,7 +68,7 @@ export class WalletWeb3Component {
 
   async withdrawETH () {
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(globalThis.ethereum)
       const signer = provider.getSigner()
 
       const contract = new ethers.Contract(BankAddress, web3WalletABI, signer)
@@ -85,7 +85,7 @@ export class WalletWeb3Component {
 
   async getUserEthBalance () {
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.Web3Provider(globalThis.ethereum)
       const signer = provider.getSigner()
       const contract = new ethers.Contract(BankAddress, web3WalletABI, signer)
       const userBalance = await contract.balanceOf(this.metamaskAddress)
@@ -103,7 +103,7 @@ export class WalletWeb3Component {
       if (isConnected) {
         await disconnect()
       }
-      if (!window.ethereum) {
+      if (!globalThis.ethereum) {
         this.snackBarHelperService.open('PLEASE_INSTALL_WEB3_WALLET', 'errorBar')
         return
       }
