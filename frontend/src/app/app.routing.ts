@@ -263,7 +263,7 @@ export function oauthMatcher (url: UrlSegment[]): UrlMatchResult {
   if (url.length === 0) {
     return null as unknown as UrlMatchResult
   }
-  const path = window.location.href
+  const path = globalThis.location.href
   if (path.includes('#access_token=')) {
     return ({ consumed: url })
   }
@@ -289,7 +289,7 @@ export function token1 (...args: number[]) { // vuln-code-snippet neutral-line t
   const L = Array.prototype.slice.call(args) // vuln-code-snippet neutral-line tokenSaleChallenge
   const D = L.shift() // vuln-code-snippet neutral-line tokenSaleChallenge
   return L.reverse().map(function (C, A) { // vuln-code-snippet neutral-line tokenSaleChallenge
-    return String.fromCharCode(C - D - 45 - A) // vuln-code-snippet neutral-line tokenSaleChallenge
+    return String.fromCodePoint(C - D - 45 - A) // vuln-code-snippet neutral-line tokenSaleChallenge
   }).join('') // vuln-code-snippet neutral-line tokenSaleChallenge
 } // vuln-code-snippet neutral-line tokenSaleChallenge
 
@@ -297,7 +297,7 @@ export function token2 (...args: number[]) { // vuln-code-snippet neutral-line t
   const T = Array.prototype.slice.call(arguments) // vuln-code-snippet neutral-line tokenSaleChallenge
   const M = T.shift() // vuln-code-snippet neutral-line tokenSaleChallenge
   return T.reverse().map(function (m, H) { // vuln-code-snippet neutral-line tokenSaleChallenge
-    return String.fromCharCode(m - M - 24 - H) // vuln-code-snippet neutral-line tokenSaleChallenge
+    return String.fromCodePoint(m - M - 24 - H) // vuln-code-snippet neutral-line tokenSaleChallenge
   }).join('') // vuln-code-snippet neutral-line tokenSaleChallenge
 } // vuln-code-snippet neutral-line tokenSaleChallenge
 // vuln-code-snippet end tokenSaleChallenge
